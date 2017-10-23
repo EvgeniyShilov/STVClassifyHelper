@@ -15,7 +15,12 @@ public class App {
             try {
                 Image input = new Image(path + "0\\" + i + ".png");
                 ImageView imageView = new ImageView(input, i + ".png");
-                final String className = reader.readLine();
+                String raw;
+                while (true) {
+                    raw = reader.readLine();
+                    if (raw.length() != 0) break;
+                }
+                final String className = raw.substring(0,1);
                 imageView.dispose();
                 final String classPath = path + "classes\\" + className;
                 File classDir = new File(classPath);
