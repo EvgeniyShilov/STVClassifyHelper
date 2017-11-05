@@ -8,7 +8,11 @@ public class Image {
     private BufferedImage image;
 
     public Image(String path) throws IOException {
-        image = ImageIO.read(new File(path));
+        this(new File(path));
+    }
+
+    public Image(File file) throws IOException {
+        image = ImageIO.read(file);
     }
 
     public Image(int width, int height) {
@@ -20,7 +24,11 @@ public class Image {
     }
 
     public Image save(String path) throws IOException {
-        ImageIO.write(image, "png", new File(path));
+        return save(new File(path));
+    }
+
+    public Image save(File file) throws IOException {
+        ImageIO.write(image, "png", file);
         return this;
     }
 
@@ -72,8 +80,16 @@ public class Image {
         return result;
     }
 
+    public static Image loadFrom(File file) throws IOException {
+        return new Image(file);
+    }
+
     public static Image loadFrom(String path) throws IOException {
         return new Image(path);
+    }
+
+    public static Image saveTo(Image image, File file) throws IOException {
+        return image.save(file);
     }
 
     public static Image saveTo(Image image, String path) throws IOException {
